@@ -6,8 +6,13 @@ let weatherModule = (function () {
   const geocoding_api_key = "";
   const geocoding_api_url = "https://maps.googleapis.com/maps/api/geocode/json";
 
-  function formatDate(options, date, locale = "en-US") {
-    return new Intl.DateTimeFormat(locale, options).format(date);
+  function formatDate(res, locale = "en-US") {
+    let date = new Date(res.date * 1000);
+    let day = new Intl.DateTimeFormat(locale, {weekday: "short"}).format(date);
+    let time = date.toLocaleString(locale, {timeZone: res.timezone, timeStyle: "short"});
+    
+
+    return `${day}, ${time}`;
   }
 
   function formatQueryParams(params) {
@@ -20,29 +25,40 @@ let weatherModule = (function () {
     $("#js-weather").find(".container").html(resultsTmpl(res, address));
   }
 
-  function displayError(msg) {
+  function displayError(msg, address) {
     $("#js-weather").find(".container").html(errorTmpl(msg, address));
   }
 
   function resultsTmpl(res, address) {
-    let date = new Date(res.current.dt * 1000);
-    let day = formatDate({ weekday: "short" }, date);
-    let time = formatDate({ timeZone: res.timezone, timeStyle: "short" }, date);
+    let current = {
+      dayTime: formatDate({ date: res.current.dt, timezone: res.timezone }),
+      temp: Math.round(res.current.temp),
+      humidity: Math.round(res.current.humidity),
+      wind_speed: Math.round(res.current.wind_speed),
+    };
 
-    let temp = Math.round(res.current.temp);
-    let humidity = Math.round(res.current.humidity);
-    let wind_speed = Math.round(res.current.wind_speed);
+    let forecast = res.daily.map(data => {
+      return `
+        <li class="forecast__item">
+          <div>${formatDate({ date: data.dt, timezone: res.timezone }).split(",")[0]}</div>
+          <div>${Math.round(data.temp.max)}</div>
+          <div>${Math.round(data.temp.min)}</div>
+        </li>
+      `;
+    });
 
     return `
       <div class="container__inner">
-        <div class="weather__curent">
+        <div class="weather__current">
           <span>${address}</span>
-          <span>${day}</span>, <span>${time}</span>
-          <div>${temp}℉</div>
-          <div>Humidity: ${humidity}%</div>
-          <div>Wind: ${wind_speed} mph</div>
+          <span>${current.dayTime}</span>
+          <div>${current.temp}℉</div>
+          <div>Humidity: ${current.humidity}%</div>
+          <div>Wind: ${current.wind_speed} mph</div>
         </div>
-        <div class="weather__forecast"></div>
+        <div class="weather__forecast">
+          <ul>${forecast.join("")}</ul>
+        </div>
       </div>
     `;
   }

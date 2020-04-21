@@ -21,7 +21,7 @@ function displayResults(responseJson) {
         //console.log(i,val)
         let imageUrl = val.urls.thumb;
         console.log(imageUrl);
-        $('.images').append(`<img src="${imageUrl}"/>`);
+        $('.images').append(`<img class="results_img" src="${imageUrl}"/>`);
     })
 
     

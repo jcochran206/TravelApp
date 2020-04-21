@@ -19,3 +19,8 @@ html {
     margin: 0 auto;
     padding: 0 2rem;
 }
+
+.results_img {
+    max-width: 100%;
+    margin: 10px;
+}

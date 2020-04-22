@@ -9,10 +9,9 @@ let weatherModule = (function () {
   function formatDate(res, locale = "en-US") {
     let date = new Date(res.date * 1000);
     let day = new Intl.DateTimeFormat(locale, {weekday: "short"}).format(date);
-    let time = date.toLocaleString(locale, {timeZone: res.timezone, timeStyle: "short"});
+    let time = date.toLocaleString(locale, {timeZone: res.timezone, timeStyle: "short"}).split(",")[1];
     
-
-    return `${day}, ${time}`;
+    return `${day}, ${time.replace(/\:\d+\s/, " ")}`;
   }
 
   function formatQueryParams(params) {
@@ -29,7 +28,7 @@ let weatherModule = (function () {
     $(".js-weather").find(".container").html(errorTmpl(msg, address));
   }
 
-  function resultsTmpl(res, address) {
+  function resultsTmpl(res, place) {
     let current = {
       dayTime: formatDate({ date: res.current.dt, timezone: res.timezone }),
       temp: Math.round(res.current.temp),
@@ -49,12 +48,19 @@ let weatherModule = (function () {
 
     return `
       <div class="container__inner">
+        <div>
+          <h3>${place}</h3>
+          <div>${current.dayTime}</div>
+        </div>
         <div class="weather__current">
-          <span>${address}</span>
-          <span>${current.dayTime}</span>
-          <div>${current.temp}℉</div>
-          <div>Humidity: ${current.humidity}%</div>
-          <div>Wind: ${current.wind_speed} mph</div>
+          <div class="weather__current-temp">
+            <span class="weather__temp">${current.temp}</span>
+            <span class="weather__unit">℉</span>
+          </div>
+          <ul class="weather__current-details">
+            <li>Humidity: ${current.humidity}%</li>
+            <li>Wind: ${current.wind_speed} mph</li>
+          </ul>
         </div>
         <div class="weather__forecast">
           <ul>${forecast.join("")}</ul>

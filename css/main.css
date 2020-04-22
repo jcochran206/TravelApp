@@ -31,3 +31,42 @@ html {
     margin: 0 auto;
     background-color: grey;
 }
+
+
+/* weatherModule css */
+.weather {
+  font-size: 14px;
+}
+
+.weather ul,
+.weather li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.weather li {
+  display: inline-block;
+  text-align: center;
+}
+
+.weather__temp {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.weather__unit {
+  font-size: 12px;
+  vertical-align: top;
+}
+
+.weather__current-temp,
+.weather__current-details {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.weather__current-details li {
+  display: block;
+  text-align: left;
+}

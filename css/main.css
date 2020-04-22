@@ -33,6 +33,12 @@ html {
     margin: 40px auto;
 }
 
+/* search form */
+#search {
+    height: 4rem;
+    width: 80%;
+}
+
 
 /* weatherModule css */
 .weather {

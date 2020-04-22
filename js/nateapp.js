@@ -3,7 +3,7 @@ let weatherModule = (function () {
   const weather_api_url = "https://api.openweathermap.org/data/2.5/onecall";
 
   // TODO: figure out how to do this without exposing key
-  const geocoding_api_key = "AIzaSyBdpIVeZeG2hBvVxLtz2IXb7UbYS9y5M5E";
+  const geocoding_api_key = "";
   const geocoding_api_url = "https://maps.googleapis.com/maps/api/geocode/json";
 
   function formatDate(res, locale = "en-US") {

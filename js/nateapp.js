@@ -22,11 +22,11 @@ let weatherModule = (function () {
   }
 
   function displayResults(res, address) {
-    $("#js-weather").find(".container").html(resultsTmpl(res, address));
+    $(".js-weather").find(".container").html(resultsTmpl(res, address));
   }
 
   function displayError(msg, address) {
-    $("#js-weather").find(".container").html(errorTmpl(msg, address));
+    $(".js-weather").find(".container").html(errorTmpl(msg, address));
   }
 
   function resultsTmpl(res, address) {

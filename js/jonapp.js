@@ -20,61 +20,54 @@ function formatQueryParams(params) {
   );
 }
 
-// function geocodePlaceId(geocoder, map, infowindow) {
-//   var placeId = document.getElementById("place-id").value;
-//   geocoder.geocode({ placeId: placeId }, function (results, status) {
-//     if (status === "OK") {
-//       if (results[0]) {
-//         map.setZoom(11);
-//         map.setCenter(results[0].geometry.location);
-//         var marker = new google.maps.Marker({
-//           map: map,
-//           position: results[0].geometry.location,
-//         });
-//         infowindow.setContent(results[0].formatted_address);
-//         infowindow.open(map, marker);
-//       } else {
-//         window.alert("No results found");
-//       }
-//     } else {
-//       window.alert("Geocoder failed due to: " + status);
-//     }
-//   });
-// }
-
 //function to build map on screen
-function initMap(coords) {
-  console.log(coords);
-  let lat = coords.lat;
-  let lng = coords.lon;
+function initMap(query="seattle") {
+  // console.log(coords);
+  // let lat = coords.lat;
+  // let lng = coords.lon;
 
   var options = {
-    center: { lat: lat, lng: lng },
+    center: { lat: 47.6062, lng: -122.3321 },
     zoom: 8,
   };
 
   let map = new google.maps.Map(document.getElementById("map"), options);
+  let geocoder = new google.maps.Geocoder();
+  let infowindow = new google.maps.InfoWindow();
 
-  let marker = new google.maps.Marker({
-    position: { lat: lat, lng: lng },
-    map: map,
-  });
+  getGeocoding(query, geocoder, map, infowindow);
+}
 
-  let infoWindow = new google.maps.InfoWindow({
-    content: "<h3> Seattle </h3>",
-  });
-
-  marker.addListener("click", function () {
-    infoWindow.open(map, marker);
+function geocodeLatLng(geocoder, map, infowindow, geo) {
+  // var input = $("#search").val();
+  // var latlngStr = input.split(",", 2);
+  let latlng = {lat: parseFloat(geo.lat), lng: parseFloat(geo.lng)};
+  console.log(geo);
+  geocoder.geocode({ location: latlng }, function (results, status) {
+    if (status === "OK") {
+      if (results[0]) {
+        map.setZoom(11);
+        var marker = new google.maps.Marker({
+          position: latlng,
+          map: map,
+        });
+        infowindow.setContent(results[0].formatted_address);
+        infowindow.open(map, marker);
+      } else {
+        window.alert("No results found");
+      }
+    } else {
+      window.alert("Geocoder failed due to: " + status);
+    }
   });
 }
 
-function getGeocoding(query) {
+function getGeocoding (query, geocoder, map, infowindow) {
   // use google geocoding_api_key here in weatherModule for now
   // until we plug in jonathan Google Maps / Places API from initial search
   const params = {
     address: query,
-    key: google_id,
+    key: google_id
   };
 
   fetch(geocoding_api_url + "?" + formatQueryParams(params).join("&"))
@@ -87,13 +80,14 @@ function getGeocoding(query) {
     .then((responseJson) => {
       // get first item in results list for now and return lat lon geocoding
       // pass to this.getWeather()
+      console.log(responseJson);
       let geocoding = {
         query: params.query,
-        formatted_address: responseJson.results[0].formatted_address,
         lat: responseJson.results[0].geometry.location.lat,
-        lon: responseJson.results[0].geometry.location.lng,
+        lng: responseJson.results[0].geometry.location.lng,
       };
-      initMap(geocoding);
+
+      geocodeLatLng(geocoder, map, infowindow, geocoding)
     })
     .catch((err) => {
       // TODO: display an error here for the user in the DOM if invalid geocoding request
@@ -122,8 +116,8 @@ function watchForm() {
     console.log(searchterm);
     //calls get photos function
     getPhotos(searchterm);
-    // initMap(searchterm);
-    getGeocoding(searchterm);
+    initMap(searchterm);
+    // getGeocoding(searchterm);
   });
 }
 

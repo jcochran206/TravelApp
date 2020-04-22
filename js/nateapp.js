@@ -8,9 +8,13 @@ let weatherModule = (function () {
 
   function formatDate(res, locale = "en-US") {
     let date = new Date(res.date * 1000);
-    let day = new Intl.DateTimeFormat(locale, {weekday: "short"}).format(date);
-    let time = date.toLocaleString(locale, {timeZone: res.timezone, timeStyle: "short"}).split(",")[1];
-    
+    let day = new Intl.DateTimeFormat(locale, { weekday: "short" }).format(
+      date
+    );
+    let time = date
+      .toLocaleString(locale, { timeZone: res.timezone, timeStyle: "short" })
+      .split(",")[1];
+
     return `${day}, ${time.replace(/\:\d+\s/, " ")}`;
   }
 
@@ -36,10 +40,12 @@ let weatherModule = (function () {
       wind_speed: Math.round(res.current.wind_speed),
     };
 
-    let forecast = res.daily.map(data => {
+    let forecast = res.daily.map((data) => {
       return `
         <li class="forecast__item">
-          <div>${formatDate({ date: data.dt, timezone: res.timezone }).split(",")[0]}</div>
+          <div>${
+            formatDate({ date: data.dt, timezone: res.timezone }).split(",")[0]
+          }</div>
           <div>${Math.round(data.temp.max)}</div>
           <div>${Math.round(data.temp.min)}</div>
         </li>

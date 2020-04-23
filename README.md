@@ -8,6 +8,10 @@ This travel application allows users to book their desired trip, see the weather
 - Jquery
 ## Required Dependencies 
 - Jquery 3.5
+- apis used :
+    - unsplash
+    - google maps 
+    - openweather api
 ## Authors 
 Nathaniel Mata and Jonathan Cochran
 ## live site

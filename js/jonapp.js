@@ -100,6 +100,7 @@ function getGeocoding (query, geocoder, map, infowindow) {
 function displayResults(responseJson) {
   //console.log(responseJson.results);
   //uses for each jquery function
+  $(".images").html("");
   $.each(responseJson.results, function (i, val) {
     //console.log(i,val) review functions
     let imageUrl = val.urls.thumb;

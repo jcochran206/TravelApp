@@ -33,6 +33,13 @@ html {
     margin: 40px auto;
 }
 
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /* search form */
 #search {
     height: 4rem;
@@ -77,3 +84,16 @@ html {
   display: block;
   text-align: left;
 }
+
+/* images */
+.images {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.results_img {
+    border-radius: 1rem;
+}
+

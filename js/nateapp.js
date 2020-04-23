@@ -1,3 +1,5 @@
+'use strict';
+
 let weatherModule = (function () {
   const weather_api_key = "8407b23e689e4645d068ec0b30bc1d1c";
   const weather_api_url = "https://api.openweathermap.org/data/2.5/onecall";
@@ -7,10 +9,9 @@ let weatherModule = (function () {
   const geocoding_api_url = "https://maps.googleapis.com/maps/api/geocode/json";
 
   function formatDate(res, locale = "en-US") {
-    console.log(res);
     let date = new Date(res.date * 1000);
     let day = new Intl.DateTimeFormat(locale, { weekday: "short" }).format(date);
-    let time = date.toLocaleString(locale, { timeZone: res.timezone, timeStyle: "short" });
+    let time = date.toLocaleTimeString(locale, { timeZone: res.timezone, timeStyle: "short" });
 
     return `${day}, ${time.replace(/\:\d+\s/, " ")}`;
   }
@@ -100,7 +101,6 @@ let weatherModule = (function () {
         .then((responseJson) => {
           // get first item in results list for now and return lat lon geocoding
           // pass to this.getWeather()
-          console.log(responseJson);
           let geocoding = {
             query: params.query,
             formatted_address: responseJson.results[0].formatted_address,
@@ -117,8 +117,6 @@ let weatherModule = (function () {
     },
 
     getWeather: function (coords) {
-
-      console.log(coords);
       const params = {
         lat: coords.lat,
         lon: coords.lon,
@@ -134,22 +132,22 @@ let weatherModule = (function () {
           throw new Error(response.statusText);
         })
         .then((responseJson) => {
-          console.log(responseJson);
           displayResults(responseJson, coords.formatted_address);
         })
         .catch((err) => displayError(err.message, coords.query));
     },
 
-    watchForm: function () {
-      $("form.search-bar").submit((event) => {
-        event.preventDefault();
-        let val = $(event.currentTarget).find("input#search").val();
+    // watchForm: function () {
+    //   $("form.search-bar").submit((event) => {
+    //     event.preventDefault();
+    //     let val = $(event.currentTarget).find("input#search").val();
 
-        // call getGeocoding with query value which will use returned lat lon to get the weather data
-        this.getGeocoding(val);
-      });
-    },
+    //     // call getGeocoding with query value which will use returned lat lon to get the weather data
+    //     this.getGeocoding(val);
+    //   });
+    // },
+    
   };
 })();
 
-$(weatherModule.watchForm());
+// $(weatherModule.watchForm());

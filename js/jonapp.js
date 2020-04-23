@@ -36,6 +36,7 @@ function initMap(query="seattle") {
   let infowindow = new google.maps.InfoWindow();
 
   getGeocoding(query, geocoder, map, infowindow);
+  weatherModule.getGeocoding(query);
 }
 
 function geocodeLatLng(geocoder, map, infowindow, geo) {

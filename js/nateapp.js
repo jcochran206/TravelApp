@@ -1,3 +1,5 @@
+'use strict';
+
 let weatherModule = (function () {
   const weather_api_key = "8407b23e689e4645d068ec0b30bc1d1c";
   const weather_api_url = "https://api.openweathermap.org/data/2.5/onecall";
@@ -135,17 +137,17 @@ let weatherModule = (function () {
         .catch((err) => displayError(err.message, coords.query));
     },
 
-    watchForm: function () {
-      $("form.search-bar").submit((event) => {
-        event.preventDefault();
-        let val = $(event.currentTarget).find("input#search").val();
+    // watchForm: function () {
+    //   $("form.search-bar").submit((event) => {
+    //     event.preventDefault();
+    //     let val = $(event.currentTarget).find("input#search").val();
 
-        // call getGeocoding with query value which will use returned lat lon to get the weather data
-        this.getGeocoding(val);
-      });
-    },
+    //     // call getGeocoding with query value which will use returned lat lon to get the weather data
+    //     this.getGeocoding(val);
+    //   });
+    // },
     
   };
 })();
 
-$(weatherModule.watchForm());
+// $(weatherModule.watchForm());

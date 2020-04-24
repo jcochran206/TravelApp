@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 let weatherModule = (function () {
   const weather_api_key = "8407b23e689e4645d068ec0b30bc1d1c";
@@ -10,8 +10,13 @@ let weatherModule = (function () {
 
   function formatDate(res, locale = "en-US") {
     let date = new Date(res.date * 1000);
-    let day = new Intl.DateTimeFormat(locale, { weekday: "short" }).format(date);
-    let time = date.toLocaleTimeString(locale, { timeZone: res.timezone, timeStyle: "short" });
+    let day = new Intl.DateTimeFormat(locale, { weekday: "short" }).format(
+      date
+    );
+    let time = date.toLocaleTimeString(locale, {
+      timeZone: res.timezone,
+      timeStyle: "short",
+    });
 
     return `${day}, ${time.replace(/\:\d+\s/, " ")}`;
   }
@@ -36,26 +41,38 @@ let weatherModule = (function () {
       temp: Math.round(res.current.temp),
       humidity: Math.round(res.current.humidity),
       wind_speed: Math.round(res.current.wind_speed),
+      weatherIconSrc: "http://openweathermap.org/img/w/" + res.current.weather[0].icon + ".png",
+      weatherDesc: res.current.weather[0].description,
     };
 
     let forecast = res.daily.map((data) => {
+      let weatherIconSrc = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
       return `
         <li class="forecast__item">
-          <div>${formatDate({ date: data.dt, timezone: res.timezone }).split(",")[0]}</div>
-          <div>${Math.round(data.temp.max)}</div>
-          <div>${Math.round(data.temp.min)}</div>
+          <div class="forecast__day">
+            ${formatDate({ date: data.dt, timezone: res.timezone }).split(",")[0] }
+          </div>
+          <div class="forecast__icon">
+            <img src="${weatherIconSrc}" alt="${data.weather[0].description}" />
+          </div>
+          <div class="forecast__max">${Math.round(data.temp.max)}°</div>
+          <div class="forecast__min">${Math.round(data.temp.min)}°</div>
         </li>
       `;
     });
 
     return `
       <div class="container__inner">
-        <div>
-          <h3>${place}</h3>
-          <div>${current.dayTime}</div>
+        <div >
+          <h3 class="current__location">${place}</h3>
+          <div class="current__time">${current.dayTime}</div>
         </div>
         <div class="weather__current">
           <div class="weather__current-temp">
+            <img
+              src="${current.weatherIconSrc}" 
+              alt="${current.weatherDesc}" 
+              class="weather__icon" />
             <span class="weather__temp">${current.temp}</span>
             <span class="weather__unit">℉</span>
           </div>
@@ -146,7 +163,6 @@ let weatherModule = (function () {
     //     this.getGeocoding(val);
     //   });
     // },
-    
   };
 })();
 

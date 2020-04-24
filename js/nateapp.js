@@ -65,7 +65,7 @@ let weatherModule = (function () {
       <div class="container__inner">
         <div >
           <h3 class="current__location">${place}</h3>
-          <div class="current__time">${current.dayTime}</div>
+          <div class="current__time">${current.dayTime}, ${current.weatherDesc}</div>
         </div>
         <div class="weather__current">
           <div class="weather__current-temp">

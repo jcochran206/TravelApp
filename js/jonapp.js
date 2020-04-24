@@ -99,7 +99,8 @@ function displayResults(responseJson) {
     //console.log(i,val) review functions
     let imageUrl = val.urls.thumb;
     console.log(imageUrl);
-    $(".images").append(`<img class="results_img" src="${imageUrl}"/>`);
+    $(".images").append(`<div class="thumbs">
+    <img class="results_img" src="${imageUrl}"/></div>`);
   });
 }
 

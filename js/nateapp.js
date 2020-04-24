@@ -15,7 +15,7 @@ let weatherModule = (function () {
     );
     let time = date.toLocaleTimeString(locale, {
       timeZone: res.timezone,
-      timeStyle: "short",
+      timeStyle: "medium",
     });
 
     return `${day}, ${time.replace(/\:\d+\s/, " ")}`;

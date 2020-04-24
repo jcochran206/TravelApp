@@ -14,6 +14,26 @@ function getPhotos(searchterm) {
     .catch((error) => console.log(error));
 }
 
+
+function buildNav(){
+    let pgSections = $('section');
+    for(section of pgSections){ 
+        let nav = document.querySelector('.navlist');
+        // create link
+        const navLink = document.createElement('li');
+        //create  anchor tags
+        const anchorTag = document.createElement('a');
+        //get section attribute
+        const pgSectionName = section.getAttribute('data-nav');
+        //set attribute 
+        anchorTag.setAttribute('href', '#'+section.id);
+        //set
+        anchorTag.textContent = pgSectionName;
+        navLink.appendChild(anchorTag);
+        nav.appendChild(navLink);
+    }
+}
+
 function formatQueryParams(params) {
   return Object.keys(params).map(
     (key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
@@ -120,6 +140,7 @@ function watchForm() {
 
 /* function that contains all forms for app to use*/
 function main() {
+    buildNav();
   watchForm();
 }
 

@@ -15,16 +15,15 @@
     <div class="container">
       <nav id="nav">
         <!-- add dynamic links to sections below-->
-        <ul>
-            <li>one</li>
-            <li>two</li>
+        <ul class="navlist">
+            
         </ul>
       </nav>
     </div>
   </header>
 
   <div id="main" class="main">
-    <section class="searchform">
+    <section class="searchform" data-nav="search">
       <div class="container">
         <form class="search-bar">
           <input type="text" id="search" placeholder="Search.." name="search">
@@ -36,7 +35,7 @@
     </section>
 
       <!-- map section -->
-    <section class="map" id="map">
+    <section class="map" id="map" data-nav="map">
         <h2>my maps</h2>
         <div class="container">
 
@@ -44,14 +43,14 @@
     </section>
 
     <!-- weather section -->
-    <section id="weather" class="js-weather weather">
+    <section id="weather" class="js-weather weather" data-nav="weather">
       <div class="container">
 
       </div>
     </section>
 
     <!-- images section -->
-    <section class="images">
+    <section class="images" id='photos' data-nav="photos">
       <div class="heading">
         <h2>Images from your search <i class="fas fa-images fa-2x"></i> </h2>
        

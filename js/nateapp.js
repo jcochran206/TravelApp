@@ -41,12 +41,12 @@ let weatherModule = (function () {
       temp: Math.round(res.current.temp),
       humidity: Math.round(res.current.humidity),
       wind_speed: Math.round(res.current.wind_speed),
-      weatherIconSrc: "http://openweathermap.org/img/w/" + res.current.weather[0].icon + ".png",
+      weatherIconSrc: "http://openweathermap.org/img/wn/" + res.current.weather[0].icon + ".png",
       weatherDesc: res.current.weather[0].description,
     };
 
     let forecast = res.daily.map((data) => {
-      let weatherIconSrc = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+      let weatherIconSrc = "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
       return `
         <li class="forecast__item">
           <div class="forecast__day">

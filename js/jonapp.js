@@ -22,28 +22,22 @@ function formatQueryParams(params) {
 
 //function to build map on screen
 function initMap(query="seattle") {
-  // console.log(coords);
-  // let lat = coords.lat;
-  // let lng = coords.lon;
+  let geocoder = new google.maps.Geocoder();
+  let infowindow = new google.maps.InfoWindow();
 
-  var options = {
-    center: { lat: 47.6062, lng: -122.3321 },
+  getGeocoding(query, geocoder, infowindow);
+  weatherModule.getGeocoding(query);
+}
+
+function geocodeLatLng(geocoder, infowindow, geo) {
+  let options = {
+    center: { lat: geo.lat, lng: geo.lng },
     zoom: 8,
   };
 
   let map = new google.maps.Map(document.getElementById("map"), options);
-  let geocoder = new google.maps.Geocoder();
-  let infowindow = new google.maps.InfoWindow();
-
-  getGeocoding(query, geocoder, map, infowindow);
-  weatherModule.getGeocoding(query);
-}
-
-function geocodeLatLng(geocoder, map, infowindow, geo) {
-  // var input = $("#search").val();
-  // var latlngStr = input.split(",", 2);
   let latlng = {lat: parseFloat(geo.lat), lng: parseFloat(geo.lng)};
-  console.log(geo);
+  
   geocoder.geocode({ location: latlng }, function (results, status) {
     if (status === "OK") {
       if (results[0]) {
@@ -63,7 +57,7 @@ function geocodeLatLng(geocoder, map, infowindow, geo) {
   });
 }
 
-function getGeocoding (query, geocoder, map, infowindow) {
+function getGeocoding (query, geocoder, infowindow) {
   // use google geocoding_api_key here in weatherModule for now
   // until we plug in jonathan Google Maps / Places API from initial search
   const params = {
@@ -88,7 +82,7 @@ function getGeocoding (query, geocoder, map, infowindow) {
         lng: responseJson.results[0].geometry.location.lng,
       };
 
-      geocodeLatLng(geocoder, map, infowindow, geocoding)
+      geocodeLatLng(geocoder, infowindow, geocoding)
     })
     .catch((err) => {
       // TODO: display an error here for the user in the DOM if invalid geocoding request

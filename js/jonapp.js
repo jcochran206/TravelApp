@@ -21,6 +21,7 @@ function buildNav(){
         let nav = document.querySelector('.navlist');
         // create link
         const navLink = document.createElement('li');
+        navLink.classList.add('hide-display');
         //create  anchor tags
         const anchorTag = document.createElement('a');
         //get section attribute
@@ -32,6 +33,13 @@ function buildNav(){
         navLink.appendChild(anchorTag);
         nav.appendChild(navLink);
     }
+}
+
+function navToggle() {
+  $("#js-nav__hamburger").on("click", function() {
+    $(".navlist").toggleClass("nav__height");
+    $(".navlist li").toggleClass("hide-display");
+  });
 }
 
 function formatQueryParams(params) {
@@ -157,7 +165,8 @@ function watchForm() {
 /* function that contains all forms for app to use*/
 function main() {
     buildNav();
-  watchForm();
+    navToggle();
+    watchForm();
 }
 
 $(main);

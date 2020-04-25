@@ -92,6 +92,7 @@ header {
 }
 
 #nav {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -104,7 +105,28 @@ header {
   justify-content: center;
   align-items: center;
   color: #fff;
+  min-height: 65px;
+  height: auto;
+  transition-property: height;
+  transition-duration: 1s;
 }
+
+#nav .nav__control-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 20px;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  height: 25px;
+  width: auto;
+}
+
+.nav__height {
+  height: 65px;
+}
+
 
 /* search form */
 .search-bar {
@@ -158,6 +180,10 @@ button {
   margin: 4px 10px;
   padding: 0 1rem;
   color: red;
+}
+
+.hide-display {
+  display: none;
 }
 
 .hidden {
@@ -344,6 +370,15 @@ button {
   .footer .list__contributors > li {
     padding: 16px;
   }
+
+  .navlist li {
+    display: block;
+  }
+
+  #nav .nav__control-icon {
+    display: none;
+  }
+
 }
 
 @media only screen and (min-width: 600px) {

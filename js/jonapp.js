@@ -92,10 +92,11 @@ function getGeocoding (query, geocoder, infowindow) {
       }
       throw new Error(response.statusText);
     })
-    .then((responseJson) => {
-      // get first item in results list for now and return lat lon geocoding
-      // pass to this.getWeather()
-      console.log(responseJson);
+    .then((responseJson) => {    
+      
+      // remove error msg for good search
+      toggleError(200);
+
       let geocoding = {
         query: params.query,
         lat: responseJson.results[0].geometry.location.lat,
@@ -107,6 +108,8 @@ function getGeocoding (query, geocoder, infowindow) {
     .catch((err) => {
       // TODO: display an error here for the user in the DOM if invalid geocoding request
       console.log(err);
+      // add error msg for bad search
+      toggleError(400);
     });
 }
 
@@ -122,6 +125,19 @@ function displayResults(responseJson) {
     $(".images").append(`<div class="thumbs">
     <img class="results_img" src="${imageUrl}"/></div>`);
   });
+}
+
+function toggleError(err) {
+  // show error for bad search terms
+  if (err === 400) {
+    $("#js-search__error")
+      .html("Search not found. Check spelling and try again.")
+      .removeClass("hidden");
+
+    return false;
+  }
+
+  $("#js-search__error").html("").removeClass("hidden");
 }
 
 // obtains user input and submit on form

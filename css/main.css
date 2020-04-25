@@ -17,7 +17,8 @@
 }
 
 html {
-    font-size: 10px;
+  font-family: 'Roboto','Open Sans', Helvetica, sans-serif;
+  font-size: 10px;
 }
 
 section {
@@ -113,11 +114,18 @@ input {
     border-radius: 50%;
 }
 
+.search__error {
+  margin: 4px 10px;
+  padding: 0 1rem;
+  color: red;
+}
 
+.hidden {
+  visibility: hidden;
+}
 
 /* weatherModule css */
 .weather {
-  font-family: sans-serif;
   font-size: 14px;
   padding: 16px;
   border: 1px solid rgba(231,236,239,1);

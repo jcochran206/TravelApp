@@ -16,3 +16,5 @@ This travel application allows users to book their desired trip, see the weather
 Nathaniel Mata and Jonathan Cochran
 ## live site
 [travel link](https://jcochran206.github.io/TravelApp/)
+## screenshot 
+![](screen1.png)

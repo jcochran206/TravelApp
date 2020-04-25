@@ -85,6 +85,25 @@ a:hover {
   color: var(--accent-color);
 }
 
+.cta-btn {
+    border-radius: .5rem;
+    padding: 1.2rem;
+    color: var(--text-icons);
+}
+/* intro screen */
+.intro__screen-inner * { margin-bottom: 40px; }
+
+.headline {
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--default-primary-color);
+}
+
+.sub-headline {
+    font-size: 1.7rem;
+    margin: 50px;
+}
+
 /* nav styleing */
 header {
   width: 100%;

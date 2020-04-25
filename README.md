@@ -17,4 +17,4 @@ Nathaniel Mata and Jonathan Cochran
 ## live site
 [travel link](https://jcochran206.github.io/TravelApp/)
 ## screenshot 
-<img src="img/screen1.png" />
+![screen] <img src="img/screen.png" width="200" height="200"/>

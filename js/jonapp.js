@@ -42,6 +42,12 @@ function navToggle() {
   });
 }
 
+function handleIntroScreen() {
+  $("#js-intro__screen-btn").on("click", function() {
+    $("#js-intro__screen").css("display", "none");
+  });
+}
+
 function formatQueryParams(params) {
   return Object.keys(params).map(
     (key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
@@ -166,6 +172,7 @@ function watchForm() {
 function main() {
     buildNav();
     navToggle();
+    handleIntroScreen();
     watchForm();
 }
 

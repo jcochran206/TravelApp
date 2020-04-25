@@ -38,7 +38,7 @@ section:nth-child(even) {
 }
 
 .results_img {
-  max-width: 100%;
+  max-width: 90%;
   margin: 10px;
 }
 

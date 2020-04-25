@@ -91,6 +91,31 @@ header {
   background-color: var(--dark-primary-color);
 }
 
+.intro__screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #E4E9EA;
+  z-index: 1000;
+}
+
+.intro__screen-inner {
+  position: absolute;
+  top: 35%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 200px;
+  text-align: center;
+}
+
+.intro__screen-inner h3 {
+  color: var(--secondary-text-color);
+}
+
 #nav {
   position: relative;
   display: flex;

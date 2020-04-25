@@ -28,9 +28,8 @@ section {
   border-radius: 3px;
 }
 
-.section:nth-child(even) {
-    background-color: aqua;
-    height: 20rem;
+section:nth-child(even) {
+    background-color: var(--accent-color);
     width: 100%;
 }
 
@@ -130,14 +129,11 @@ input {
     font-size: 1.5rem;
     width: 100%;
     border: none;
-<<<<<<< Updated upstream
 }
 
 input:focus {
   font-weight: bold;
   outline: none;
-=======
->>>>>>> Stashed changes
 }
 
 button {
@@ -265,11 +261,6 @@ button {
     
 }
 
-.images {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-    grid-column-gap: 1rem;
-}
 
 .results_img {
     border-radius: 1rem;
@@ -285,6 +276,14 @@ button {
   .search__error {
     font-size: 13px;
   }
+
+  .images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, auto);
+    grid-gap: 1rem;
+    }
+
 }
 
 @media only screen and (min-width: 600px) {
@@ -305,15 +304,16 @@ button {
 
     /* images */
     .images {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(5, 15vw);
+        grid-gap: 1rem;
     }
 
     .thumbs {
-        height: 30vh;
-        flex-grow: 1;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
 

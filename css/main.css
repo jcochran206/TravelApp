@@ -25,6 +25,7 @@ html {
 section {
   width: 100%;
   margin: 0 auto 40px;
+  border-radius: 3px;
 }
 
 .section:nth-child(even) {
@@ -160,7 +161,6 @@ button {
   font-size: 14px;
   padding: 16px;
   border: 1px solid rgba(231,236,239,1);
-  border-radius: 3px;
 }
 
 .weather ul,
@@ -185,7 +185,6 @@ button {
   display: flex;
   flex-direction: row;
   padding: 16px 0;
-  border-radius: 3px;
 }
 
 .weather__forecast li {
@@ -268,7 +267,9 @@ button {
     height: 400px;
   }
 
-
+  .search__error {
+    font-size: 13px;
+  }
 }
 
 @media only screen and (min-width: 600px) {
